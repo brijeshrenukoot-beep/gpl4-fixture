@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPL 4 Cricket Fixture</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+width:100%;
+height:100vh;
+overflow:hidden;
+background:
+linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.78)),
+url('https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=1920&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+color:white;
+}
+
+/* MAIN */
+
+.main{
+width:100%;
+height:100vh;
+position:relative;
+overflow:hidden;
+}
+
+/* HEADER */
+
+.header{
+position:absolute;
+top:10px;
+width:100%;
+text-align:center;
+z-index:100;
+}
+
+.header h1{
+font-size:95px;
+font-weight:800;
+line-height:90px;
+text-shadow:0 0 25px rgba(255,180,0,.9);
+}
+
+.header h1 span{
+color:#ffb400;
+}
+
+.header p{
+font-size:42px;
+font-weight:700;
+font-style:italic;
+margin-top:-5px;
+}
+
+/* ARC */
+
+.arc{
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+width:1400px;
+height:700px;
+border-top:4px solid #ffb400;
+border-radius:700px 700px 0 0;
+overflow:hidden;
+}
+
+/* TEAM CARD */
+
+.team{
+position:absolute;
+width:155px;
+height:250px;
+background:rgba(0,10,30,.88);
+border:2px solid rgba(255,180,0,.75);
+clip-path:polygon(10% 0%,90% 0%,100% 100%,0% 100%);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+transition:.3s;
+backdrop-filter:blur(8px);
+}
+
+.team:hover{
+transform:scale(1.08);
+border:3px solid #ffb400;
+box-shadow:0 0 30px rgba(255,180,0,.9);
+z-index:10;
+}
+
+.team img{
+width:105px;
+height:105px;
+object-fit:contain;
+margin-bottom:12px;
+filter:drop-shadow(0 0 12px rgba(255,180,0,.8));
+}
+
+.team-name{
+font-size:13px;
+font-weight:700;
+line-height:20px;
+text-align:center;
+padding:0 8px;
+}
+
+/* TEAM POSITIONS */
+
+.t1{
+left:0;
+bottom:0;
+transform:rotate(-18deg);
+}
+
+.t2{
+left:150px;
+bottom:95px;
+transform:rotate(-12deg);
+}
+
+.t3{
+left:340px;
+bottom:165px;
+transform:rotate(-6deg);
+}
+
+.t4{
+left:500px;
+bottom:225px;
+transform:rotate(-2deg);
+}
+
+.t5{
+right:500px;
+bottom:225px;
+transform:rotate(2deg);
+}
+
+.t6{
+right:340px;
+bottom:165px;
+transform:rotate(6deg);
+}
+
+.t7{
+right:150px;
+bottom:95px;
+transform:rotate(12deg);
+}
+
+.t8{
+right:0;
+bottom:0;
+transform:rotate(18deg);
+}
+
+/* FIXTURE PANEL */
+
+.fixture-panel{
+position:absolute;
+top:120px;
+left:40px;
+width:320px;
+height:350px;
+background:rgba(0,0,0,.82);
+border:2px solid #ffb400;
+border-radius:24px;
+padding:12px;
+backdrop-filter:blur(10px);
+
+opacity:0;
+visibility:hidden;
+transition:.3s;
+
+overflow:hidden;
+z-index:50;
+}
+
+/* SHOW */
+
+.fixture-panel.show{
+opacity:1;
+visibility:visible;
+}
+
+/* TITLE */
+
+.fixture-title{
+font-size:22px;
+font-weight:700;
+color:#ffb400;
+margin-bottom:10px;
+text-align:center;
+}
+
+/* FIXTURE ITEM */
+
+.fixture-item{
+background:rgba(255,255,255,.05);
+border-left:3px solid #ffb400;
+padding:7px 10px;
+border-radius:10px;
+margin-bottom:5px;
+transition:.3s;
+
+font-size:11px;
+font-weight:600;
+color:white;
+
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+line-height:16px;
+}
+
+.fixture-item:hover{
+background:rgba(255,180,0,.14);
+transform:translateX(3px);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1500px){
+
+.arc{
+transform:translate(-50%,-50%) scale(.82);
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="main">
+
+<!-- HEADER -->
+
+<div class="header">
+<h1>GPL <span>4</span></h1>
+<p>Cricket match fixture</p>
+</div>
+
+<!-- FIXTURE PANEL -->
+
+<div class="fixture-panel" id="fixturePanel">
+
+<div class="fixture-title" id="fixtureTitle">
+Thunder Titans
+</div>
+
+<div id="fixtureList"></div>
+
+</div>
+
+<!-- ARC -->
+
+<div class="arc">
+
+<!-- LEFT TEAMS -->
+
+<div class="team t1"
+onmouseenter="showFixture('Thunder Titans','left')"
+onmouseleave="hideFixture()">
+
+<img src="titans.png">
+<div class="team-name">THUNDER<br>TITANS</div>
+
+</div>
+
+<div class="team t2"
+onmouseenter="showFixture('Grasim PowerHitters','left')"
+onmouseleave="hideFixture()">
+
+<img src="powerhitters.png">
+<div class="team-name">GRASIM<br>POWERHITTERS</div>
+
+</div>
+
+<div class="team t3"
+onmouseenter="showFixture('Grasim Thunders','left')"
+onmouseleave="hideFixture()">
+
+<img src="thunders.png">
+<div class="team-name">GRASIM<br>THUNDERS</div>
+
+</div>
+
+<div class="team t4"
+onmouseenter="showFixture('Grasim Predators','left')"
+onmouseleave="hideFixture()">
+
+<img src="predators.png">
+<div class="team-name">GRASIM<br>PREDATORS</div>
+
+</div>
+
+<!-- RIGHT TEAMS -->
+
+<div class="team t5"
+onmouseenter="showFixture('Renukoot Royals','right')"
+onmouseleave="hideFixture()">
+
+<img src="royals.png">
+<div class="team-name">RENUKOOT<br>ROYALS</div>
+
+</div>
+
+<div class="team t6"
+onmouseenter="showFixture('Velocity Vikings','right')"
+onmouseleave="hideFixture()">
+
+<img src="vikings.png">
+<div class="team-name">VELOCITY<br>VIKINGS</div>
+
+</div>
+
+<div class="team t7"
+onmouseenter="showFixture('Grasim Avengers','right')"
+onmouseleave="hideFixture()">
+
+<img src="avengers.png">
+<div class="team-name">GRASIM<br>AVENGERS</div>
+
+</div>
+
+<div class="team t8"
+onmouseenter="showFixture('Grasim Dhurandhars','right')"
+onmouseleave="hideFixture()">
+
+<img src="dhurandhars.png">
+<div class="team-name">GRASIM<br>DHURANDHARS</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const teams = {
+
+"Thunder Titans":[
+["15-May-26","vs Grasim Dhurandhars"],
+["21-May-26","vs Grasim Avengers"],
+["27-May-26","vs Velocity Vikings"],
+["02-Jun-26","vs Grasim PowerHitters"],
+["04-Jun-26","vs Renukoot Royals"],
+["06-Jun-26","vs Grasim Thunders"],
+["13-Jun-26","vs Grasim Predators"]
+],
+
+"Grasim PowerHitters":[
+["16-May-26","vs Renukoot Royals"],
+["22-May-26","vs Grasim Thunders"],
+["28-May-26","vs Grasim Predators"],
+["02-Jun-26","vs Thunder Titans"],
+["05-Jun-26","vs Grasim Avengers"],
+["09-Jun-26","vs Velocity Vikings"],
+["12-Jun-26","vs Grasim Dhurandhars"]
+],
+
+"Grasim Thunders":[
+["20-May-26","vs Grasim Predators"],
+["22-May-26","vs Grasim PowerHitters"],
+["26-May-26","vs Renukoot Royals"],
+["01-Jun-26","vs Grasim Dhurandhars"],
+["06-Jun-26","vs Thunder Titans"],
+["11-Jun-26","vs Grasim Avengers"],
+["15-Jun-26","vs Velocity Vikings"]
+],
+
+"Grasim Predators":[
+["18-May-26","vs Grasim Avengers"],
+["20-May-26","vs Grasim Thunders"],
+["23-May-26","vs Velocity Vikings"],
+["28-May-26","vs Grasim PowerHitters"],
+["08-Jun-26","vs Grasim Dhurandhars"],
+["10-Jun-26","vs Renukoot Royals"],
+["13-Jun-26","vs Thunder Titans"]
+],
+
+"Renukoot Royals":[
+["16-May-26","vs Grasim PowerHitters"],
+["19-May-26","vs Velocity Vikings"],
+["26-May-26","vs Grasim Thunders"],
+["29-May-26","vs Grasim Dhurandhars"],
+["04-Jun-26","vs Thunder Titans"],
+["10-Jun-26","vs Grasim Predators"],
+["16-Jun-26","vs Grasim Avengers"]
+],
+
+"Velocity Vikings":[
+["19-May-26","vs Renukoot Royals"],
+["23-May-26","vs Grasim Predators"],
+["27-May-26","vs Thunder Titans"],
+["30-May-26","vs Grasim Avengers"],
+["03-Jun-26","vs Grasim Dhurandhars"],
+["09-Jun-26","vs Grasim PowerHitters"],
+["15-Jun-26","vs Grasim Thunders"]
+],
+
+"Grasim Avengers":[
+["18-May-26","vs Grasim Predators"],
+["21-May-26","vs Thunder Titans"],
+["25-May-26","vs Grasim Dhurandhars"],
+["30-May-26","vs Velocity Vikings"],
+["05-Jun-26","vs Grasim PowerHitters"],
+["11-Jun-26","vs Grasim Thunders"],
+["16-Jun-26","vs Renukoot Royals"]
+],
+
+"Grasim Dhurandhars":[
+["15-May-26","vs Thunder Titans"],
+["25-May-26","vs Grasim Avengers"],
+["29-May-26","vs Renukoot Royals"],
+["01-Jun-26","vs Grasim Thunders"],
+["03-Jun-26","vs Velocity Vikings"],
+["08-Jun-26","vs Grasim Predators"],
+["12-Jun-26","vs Grasim PowerHitters"]
+]
+
+};
+
+function showFixture(team,side){
+
+const panel = document.getElementById("fixturePanel");
+
+panel.classList.add("show");
+
+if(side=="left"){
+panel.style.left = "40px";
+panel.style.right = "auto";
+}
+else{
+panel.style.right = "40px";
+panel.style.left = "auto";
+}
+
+document.getElementById("fixtureTitle").innerHTML = team;
+
+let html = "";
+
+teams[team].forEach(match=>{
+
+html += `
+<div class="fixture-item">
+${match[0]} &nbsp; | &nbsp; ${match[1]}
+</div>
+`;
+
+});
+
+document.getElementById("fixtureList").innerHTML = html;
+
+}
+
+function hideFixture(){
+
+document.getElementById("fixturePanel")
+.classList.remove("show");
+
+}
+
+</script>
+
+</body>
+</html>
